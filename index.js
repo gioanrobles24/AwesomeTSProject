@@ -19,4 +19,4 @@ const root = () => {
 
 AppRegistry.registerComponent( 
     appName, 
-    () => root )
+    () => root)

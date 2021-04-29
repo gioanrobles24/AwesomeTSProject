@@ -45,7 +45,7 @@ const mapStateToProps = state  => {
  }
 
 const mapDispatchToProps = dispatch => ({
-  complete : (id) => dispatch(complete(id))
+ /*  complete : (id) => dispatch(complete(id)) */
 })
 
 export default connect(mapStateToProps , mapDispatchToProps)(Home) 

@@ -5,6 +5,9 @@ import SelectLanguage from './../components/LanguageScreen/SelectLanguage'
 import CovidTool from './../components/CovidToolScreen/CovidTool' 
 import StepOne from './../components/CovidToolScreen/Steps/StepOne'
 import StepTwo from './../components/CovidToolScreen/Steps/StepTwo'
+import StepThree from './../components/CovidToolScreen/Steps/StepThree'
+import StepFour from './../components/CovidToolScreen/Steps/StepFour'
+
 const Stack = createStackNavigator();
 
 const MainStack = () => {
@@ -15,6 +18,8 @@ const MainStack = () => {
           <Stack.Screen name="CovidTool" component={CovidTool} />
           <Stack.Screen name="CovidTStepOne" component={StepOne} />
           <Stack.Screen name="CovidTStepTwo" component={StepTwo} />
+          <Stack.Screen  name="CovidTStepThree" component={StepThree} />
+          <Stack.Screen options={{headerShown: false}}  name="CovidTStepFour" component={StepFour} />
         </Stack.Navigator>
       );
 }

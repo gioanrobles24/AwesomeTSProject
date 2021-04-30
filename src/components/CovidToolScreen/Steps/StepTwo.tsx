@@ -5,7 +5,7 @@ import Swiper from 'react-native-swiper'
 import { useTranslation } from 'react-i18next'
 import StepIndicator from 'react-native-step-indicator'
 import { Icon, Button }  from 'react-native-elements'
-
+import { complete } from './../../../services/reducers/todos'
 const questions = [
   {id : 0 , question: '¿Tiene fiebre por encima de 99.6F grados? (37.5C grandos)'},
   {id : 1, question: '¿Usted tiene tos?'} ,
@@ -13,7 +13,7 @@ const questions = [
   {id : 3 , question: '¿Está experimentando dolores corporales' },
   {id : 4 , question: '¿padece de presión alta?' },
   {id : 5 , question: '¿ ha viajado en las ultimas 2 semanas ?' },
-  {id : 6 , question:  'Padece de una enfermedad crónica como diabetes, o problemas cardíacos o respitarorios?'},
+  {id : 6 , question:  '¿Padece de una enfermedad crónica como diabetes, o problemas cardíacos o respitarorios?'},
   {id : 7 , question: '¿ Tiene 65 años o mas?' },
   {id : 8 , question:  '¿ se ha hecho alguna prueba positiva para la gripe u otros virus respiratorios en las últimas 2 semanas?'},
   {id : 9 , question: '¿ Tuvo contacto con alguien con diagnostico positivo al COVID-19 o entró en contacto con fluidos de nariz y boca de una persona que fue diagnosticada con COVID-19?' }
@@ -39,9 +39,8 @@ const firstIndicatorStyles = {
   currentStepLabelColor: '#4aae4f',
 };
 
-const  StepTwo = ({ navigation, data }) => {
-  const [currentPage, setCurrentPage] = React.useState<number>(0);
-  
+const  StepTwo = ({ navigation, data, complete }) => {
+  const [currentPage, setCurrentPage] = useState(0)
   const covidToolInfo = data.categories.covidTool
     const { t, i18n } = useTranslation()
     const lang = i18n.language
@@ -56,30 +55,44 @@ const  StepTwo = ({ navigation, data }) => {
        } else{
            setNameCat(covidToolInfo.name.es)
        }
+       setAnswerCount(0)
+       setCurrentPage(0)  
    }, [])  
 
-  const onStepPress = (position: number) => {
-    console.log(position)
-  }
+
   const nextQuestion = ( value : number ) => {
     setAnswerCount(answerCount + value)
-    setCurrentPage(currentPage + 1)
+    
+    if(currentPage == 9){
+      complete(answerCount)
+      navigation.navigate('CovidTStepThree')
+    } else{
+      setCurrentPage(currentPage + 1)
+    }
   }
 
   function Questions() {
     const question = questions.find(element => element.id == currentPage)
     console.log('found',question)
     return (
-      <View style={styles.questionContainer}>
-        <Text style={styles.text}>{question?.question} </Text>
-        <Button
-          title={'Si'}
-          onPress={ () => nextQuestion(20) }
-        />
-         <Button
-          title={'no'}
-          onPress={ () => nextQuestion(0)}
-        />
+      <View>
+         <View style={styles.questionContainer}>
+           <Text style={styles.text}>{question?.question} </Text>
+         </View>
+        <View style={styles.buttonRow}>
+            <Button
+              title={'Si'}
+              type="solid"
+              onPress={ () => nextQuestion(20) }
+              buttonStyle={styles.buttonPrimary}
+            />
+            <Button
+              title={'No'}
+              type="solid"
+              onPress={ () => nextQuestion(0)}
+              buttonStyle={styles.buttonSecondary}
+            />
+        </View>
       </View>
     );
   }
@@ -98,12 +111,11 @@ const  StepTwo = ({ navigation, data }) => {
       <View style={styles.stepIndicator}>
         <StepIndicator
           customStyles={firstIndicatorStyles}
-          currentPosition={currentPage}
-          onPress={onStepPress}
+          currentPosition={currentPage} 
           stepCount={10}
         />
-        <Questions/>
       </View>
+      <Questions/>
     </View>
   );
 }
@@ -113,6 +125,7 @@ const mapStateToProps = state  => {
  }
 
 const mapDispatchToProps = dispatch => ({
+  complete : (anwsers) => dispatch(complete(anwsers))
 })
 
 export default connect(mapStateToProps , mapDispatchToProps)(StepTwo) 
@@ -120,42 +133,38 @@ export default connect(mapStateToProps , mapDispatchToProps)(StepTwo)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#ffffff',
   },
   stepIndicator: {
-    marginVertical: 50,
+    marginVertical: 10,
     marginLeft:10,
-    marginRight:10
-  },
-  page: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  stepLabel: {
-    fontSize: 12,
-    textAlign: 'center',
-    fontWeight: '500',
-    color: '#999999',
-  },
-  stepLabelSelected: {
-    fontSize: 12,
-    textAlign: 'center',
-    fontWeight: '500',
-    color: '#4aae4f',
+    marginRight:10,
   },
   header: {
     margin: 20
   },
   textHeader: {
-    fontSize: 17,
+    fontSize: 18,
     fontWeight:'bold'
   },
   text: {
-     fontSize:16,
+     fontSize:17,
      fontStyle:'normal'
   },
   questionContainer: {
-    margin:20
+    margin:20,
+  },
+  buttonRow : {
+    margin:20,
+  }, 
+  buttonPrimary : { 
+    backgroundColor:'#4aae4f', 
+    marginTop: 10, 
+    marginBottom:10 
+  },
+  buttonSecondary : {
+    backgroundColor:'#a4d4a5',
   }
+  
 });

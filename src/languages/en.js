@@ -11,6 +11,10 @@ let en = {
       "back" : "Back",
       "good_final_msg" : "Your symptoms do not indicate that you need to have a test. We provide you with the following link so that you can stay informed:",
       "not_so_good_final_msg" : "We recommend that you contact your healthcare provider or an urgent care clinic for an evaluation, and if appropriate, they will refer you for COVID-19 testing. Let them know that you have completed this self-assessment. Download and print your results and bring them to your provider.",
+      "report_price": "Report Price Grouging",
+      "report_price_desc": "Write a breve  description",
+      "take_picture" : "Take picture",
+      "choose_from" : "choose from gallery"
     }
   }
   

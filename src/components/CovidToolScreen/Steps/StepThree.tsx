@@ -2,8 +2,7 @@ import React, { useState, useEffect  } from 'react'
 import { StyleSheet, View, Text, TextInput, Alert  } from 'react-native';
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Icon, Button }  from 'react-native-elements'
-import { Value } from 'react-native-reanimated';
+import {  Button }  from 'react-native-elements'
 
 
 const  StepThree = ({ navigation, data }) => {

@@ -11,7 +11,11 @@ let es = {
       "back" : "Atrás",
       "next": "siguiente",
       "good_final_msg" : 'Sus sintomas no indican que necesite hacerse una prueba. Le proporcionamos el siguiente enlace para manterse informado:',
-      "not_so_good_final_msg" : "Le recomendamos que se comunique con su proveedor de atención médica o una clínica de atención urgente para una evaluación, y si corresponde, lo derivarán para la prueba COVID-19. Infórmeles que ha completado esta autoevaluación. Descargue e imprima sus resultados y tráigalos a su proveedor."
+      "not_so_good_final_msg" : "Le recomendamos que se comunique con su proveedor de atención médica o una clínica de atención urgente para una evaluación, y si corresponde, lo derivarán para la prueba COVID-19. Infórmeles que ha completado esta autoevaluación. Descargue e imprima sus resultados y tráigalos a su proveedor.",
+      "report_price": "Reportar incremento de precios",
+      "report_price_desc": "Escriba una breve descripción del problema",
+      "take_picture" : "Tomar una foto",
+      "choose_from" : "Elegir de galería"
     }
   }
   

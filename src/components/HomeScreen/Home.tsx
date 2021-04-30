@@ -13,7 +13,7 @@ const Home = ({ navigation, data }) => {
       if(id == 1){
           navigation.navigate('CovidTool')
        } else{
-         Alert.alert('Opcion Inhabilitada por los momentos')
+         navigation.navigate('PriceGrouding')
        }
     }
     return (
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly'
   },
   header: {
-    margin: 10
+    margin: 30
   },
   textHeader: {
     fontSize: 17
